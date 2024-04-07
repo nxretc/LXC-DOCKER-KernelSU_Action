@@ -168,7 +168,21 @@ jobs:
         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM
         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM_SUBSET
         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_EEM
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_PRINTER
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_LB_SS
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UAC1
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UAC1_LEGACY
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UAC2
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UVC
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_NCM
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_OBEX
          
+         
+         
+         
+         
+         
+        
 
     - name: 打入Makefile补丁
       if: env.MAKEFILE_PATCH == 'true'
