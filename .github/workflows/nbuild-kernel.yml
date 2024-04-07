@@ -225,9 +225,9 @@ jobs:
         export LXC_PATCHES=$GITHUB_WORKSPACE/patches/lxc-docker
         bash $GITHUB_WORKSPACE/scripts/patch/lxc-docker.sh
 
-
-  if: env.UGT == 'true'
-      run:
+    - name: 开启USB Gadget Tool
+      if: env.UGT == 'true'
+       run:|
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_IIO_CONFIGFS
         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM
