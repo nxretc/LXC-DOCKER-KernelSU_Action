@@ -159,7 +159,7 @@ jobs:
         bash $GITHUB_WORKSPACE/scripts/check-kernel-config/LXC-DOCKER-OPEN-CONFIG.sh arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} -w
 
     - name: 开启USB Gadget Tool
-      if: env.UGT == 'true'
+      if: env.ENABLE_UGT == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_IIO_CONFIGFS
@@ -178,7 +178,7 @@ jobs:
 
                   
     - name: 开启APatch支持
-      if: env.ENABLE_APATCH == 'true'
+      if: env.ENABLE_APATCH_SUPPORT == 'true'
       run: |
          cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
          scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_KALLSYMS
