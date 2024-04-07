@@ -219,6 +219,35 @@ jobs:
         export LXC_PATCHES=$GITHUB_WORKSPACE/patches/lxc-docker
         bash $GITHUB_WORKSPACE/scripts/patch/lxc-docker.sh
 
+
+    - name: 开启USB Gadget Tool
+      if: env.UGT == 'true'
+       run:|
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_IIO_CONFIGFS
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM_SUBSET
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_EEM
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_PRINTER
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_LB_SS
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UAC1
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UAC1_LEGACY
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UAC2
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_F_UVC
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_NCM
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_OBEX
+
+
+                  
+    - name: 开启APatch支持
+      if: env.ENABLE_APATCH == 'true'
+      run: |
+         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_KALLSYMS
+         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_KALLSYMS_ALL
+         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable DEBUG_KERNEL
+         scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USER_NS 
+
     - name: Disable ANDROID_PARANOID_NETWORK
       if: env.ANDROID_PARANOID_NETWORK_OFF == 'true'
       run: |
