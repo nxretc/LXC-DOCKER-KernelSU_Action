@@ -1,4 +1,9 @@
-name: 编译 ksu docker lxc nethunter 内核
+
+name: "Build kernels"
+
+env:
+  OUT_DIR: "${{ github.workspace }}/out"
+
 on:
   workflow_dispatch:
 
