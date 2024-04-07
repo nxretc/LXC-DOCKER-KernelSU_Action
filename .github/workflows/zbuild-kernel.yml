@@ -1,8 +1,5 @@
 name: 编译 ksu docker lxc nethunter 内核
 on:
-  watch:
-    types: [started]
-
   workflow_dispatch:
 
 jobs:
