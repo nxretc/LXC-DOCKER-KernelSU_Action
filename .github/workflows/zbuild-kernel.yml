@@ -163,9 +163,12 @@ jobs:
     - name: 开启USB Gadget Tool
       if: env.UGT == 'true'
       run: |
-        cd $GITHUB_WORKSPACE/p/android-kernel
-        bash $GITHUB_WORKSPACE/scripts/check-kernel-config/LXC-DOCKER-OPEN-CONFIG.sh arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} -w
-
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_IIO_CONFIGFS
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_ECM_SUBSET
+        scripts/config --file arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} --enable CONFIG_USB_CONFIGFS_EEM
+         
 
     - name: 打入Makefile补丁
       if: env.MAKEFILE_PATCH == 'true'
