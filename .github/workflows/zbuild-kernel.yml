@@ -160,6 +160,12 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         bash $GITHUB_WORKSPACE/scripts/check-kernel-config/LXC-DOCKER-OPEN-CONFIG.sh arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} -w
 
+    - name: 开启USB Gadget Tool
+      if: env.UGT == 'true'
+      run: |
+        cd $GITHUB_WORKSPACE/p/android-kernel
+        bash $GITHUB_WORKSPACE/scripts/check-kernel-config/LXC-DOCKER-OPEN-CONFIG.sh arch/${{ env.ARCH }}/configs/${{ env.KERNEL_CONFIG }} -w
+
 
     - name: 打入Makefile补丁
       if: env.MAKEFILE_PATCH == 'true'
